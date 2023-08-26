@@ -13,7 +13,7 @@ const GetWeather = () => {
    const response = await fetch(url); 
     const resJson = await response.json();
  
-   setWeather(resJson.weather[0]);
+    setWeather(resJson.weather);
   
     setCity(resJson.main);
    
@@ -50,7 +50,7 @@ onChange={(event) =>{ setSearch(event.target.value) } } />
     <h1 className="temp"> {Math.floor(city.temp)}  °Cel</h1>
    
     <h3 className="temp"> Feels Like : {Math.floor(city.feels_like)} °Cel </h3>
-    <h3 className="temp">   Weather condition : {weather.main}  </h3>
+    <h3 className="temp">   Weather condition : {weather[0].main}  </h3>
     <h3 className="temp"> Humidity : {city.humidity}% </h3>
     <h3 className="temp"> Pressure : {city.pressure}Pa</h3>
     <h3 className="tempmin_max"> Min: {Math.floor(city.temp_min)}  °Cel | Max: {Math.floor(city.temp_max)}  °Cel </h3>
