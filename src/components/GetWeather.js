@@ -6,15 +6,17 @@ const GetWeather = () => {
 
     const [city, setCity]= useState(null);  
     const [search, setSearch] = useState("Jamshedpur");
-    
+     const [weather, setWeather]= useState(null);  
     useEffect(() => {
     const fetchApi = async () => {
    const url =`https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=56de3f1cd28ee6945595555a0afb69af`;
    const response = await fetch(url); 
     const resJson = await response.json();
-   // console.log(resJson); 
+ 
+   setWeather(resJson.weather[0]);
+  
     setCity(resJson.main);
-    
+   
     };
     
     fetchApi();
@@ -45,12 +47,15 @@ onChange={(event) =>{ setSearch(event.target.value) } } />
     <div>
     <div className="info">
     <h2 className="Location"><i className="fas fa-street-view"></i> {search}</h2>
-    <h1 className="temp"> {city.temp}  °Cel</h1>
-    <h3 className="tempmin_max"> Min: {city.temp_min}  °Cel | Max: {city.temp_min}  °Cel </h3>
+    <h1 className="temp"> {Math.floor(city.temp)}  °Cel</h1>
+   
+    <h3 className="temp"> Feels Like : {Math.floor(city.feels_like)} °Cel </h3>
+    <h3 className="temp">   Weather condition : {weather.main}  </h3>
+    <h3 className="temp"> Humidity : {city.humidity}% </h3>
+    <h3 className="temp"> Pressure : {city.pressure}Pa</h3>
+    <h3 className="tempmin_max"> Min: {Math.floor(city.temp_min)}  °Cel | Max: {Math.floor(city.temp_max)}  °Cel </h3>
     </div>
-    <div className = "wave -one"></div>
-    <div className="wave -two"></div>
-    <div className = "wave -three"></div>
+   
 
     </div>
     )}
